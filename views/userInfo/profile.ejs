@@ -1,0 +1,133 @@
+<%- include ('../partails/header') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="header__logo">
+                <a href="/"><img src="img/logo.png" alt=""></a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <nav class="header__menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Shop</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3">
+            <div class="header__cart">
+                <ul>
+                  <% if (currentUser) { %>
+                    <li>
+                      <a href="/favourite">
+                        <i class="fa fa-heart">
+                        </i>
+                        <span>
+                          <%= favouriteNum %>
+                        </span>
+                      </a>
+                    </li>
+                  <% } %>
+                    <li>
+                      <a href="/mycart">
+                        <i class="fa fa-shopping-bag">
+                        </i>
+                        <span class="products-num">
+                          <% if(session.cart) { %>
+                              <%= session.cart.totalQty %>
+                            <% }else{ %>
+                              0
+                            <% } %>
+                        </span>
+                      </a>
+                    </li>
+                </ul>
+                <div class="header__cart__price">
+                  <% if(session.cart){ %>
+                  item: <span> $<%= session.cart.totalPrice %>  </span>
+                <% }else{ %>
+                  item: <span> $0 </span>
+                  <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="humberger__open">
+        <i class="fa fa-bars"></i>
+    </div>
+</div>
+<!-- Header Section End -->
+
+<!-- flash messages -->
+  <div class="container" >
+    <% if(error && error.length > 0){ %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+  <% if(success && success.length > 0){ %>
+    <div class="alert alert-success mt-4" role="alert" >
+      <%= success %>
+    </div>
+    <% } %>
+  </div>
+<!-- flash messages end-->
+
+<!-- profile Information -->
+  <div class="container">
+    <div class="checkout__form">
+        <strong><h4>Profile Information</h4></strong>
+    </div>
+
+    <form action="/profile/edit?_method=PUT" method="POST">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="checkout__input">
+            <h4>First Name:</h4>
+            <input type="text" name="firstName" value="<%=currentUser.firstName %>" required>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="checkout__input">
+            <h4>Last Name:</h4>
+            <input type="text" name="lastName" value="<%=currentUser.lastName %>" required>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="checkout__input">
+            <h4>Email:</h4>
+            <input type="text" name="username" value="<%=currentUser.username %>" required>
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="checkout__input">
+            <h4>Phone:</h4>
+            <input type="text" name="phone" value="<%=currentUser.phone %>" required>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h4>Gender:</h4>
+            <select name="gender" required>
+							<option value="<%=currentUser.gender %>" selected> <%=currentUser.gender %> </option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+							<option value="other">Other</option>
+						</select>
+        </div>
+    </div>
+
+      <button class="btn btn-md btn-warning" >Edit Info</button>
+    </form>
+  </div>
+
+
+
+<%- include ('../partails/footer') -%>

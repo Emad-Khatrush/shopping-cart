@@ -1,0 +1,107 @@
+<%- include ('../partails/header') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="header__logo">
+                <a href="/"><img src="img/logo.png" alt=""></a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <nav class="header__menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Shop</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3">
+            <div class="header__cart">
+                <ul>
+                  <% if (currentUser) { %>
+                    <li>
+                      <a href="/favourite">
+                        <i class="fa fa-heart">
+                        </i>
+                        <span>
+                          <%= favouriteNum %>
+                        </span>
+                      </a>
+                    </li>
+                  <% } %>
+                    <li>
+                      <a href="/mycart">
+                        <i class="fa fa-shopping-bag">
+                        </i>
+                        <span class="products-num">
+                          <% if(session.cart) { %>
+                              <%= session.cart.totalQty %>
+                            <% }else{ %>
+                              0
+                            <% } %>
+                        </span>
+                      </a>
+                    </li>
+                </ul>
+                <div class="header__cart__price">
+                  <% if(session.cart){ %>
+                  item: <span> $<%= session.cart.totalPrice %>  </span>
+                <% }else{ %>
+                  item: <span> $0 </span>
+                  <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="humberger__open">
+        <i class="fa fa-bars"></i>
+    </div>
+</div>
+<!-- Header Section End -->
+
+<!-- flash messages -->
+  <div class="container" >
+    <% if(error && error.length > 0){ %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+  <% if(success && success.length > 0){ %>
+    <div class="alert alert-success mt-4" role="alert" >
+      <%= success %>
+    </div>
+    <% } %>
+  </div>
+<!-- flash messages end-->
+
+<div class="container">
+  <% if (favourites) { %>
+  <div class="checkout__form">
+      <strong><h4>My Favourites</h4></strong>
+  </div>
+
+  <div class="row">
+      <% favourites.forEach((products) => { %>
+        <div class="col-lg-4 col-md-6">
+          <div class="card" style="width: 18rem; margin-bottom: 15px;">
+            <img src="<%= products.product.image %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= products.product.name %></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="/products/<%= products.product._id %>" class="btn btn-primary">Go product info</a>
+              <form action="/products/<%= products.product._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete from list</button>
+              </form>
+              <a href="/add-to-cart/<%= products.product._id %>/1" class="btn btn-warning">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+  </div>
+  <% }else { %>
+    <h1> Favourite List empty </h1>
+  <% } %>
+</div>
+
+<%- include ('../partails/footer') -%>

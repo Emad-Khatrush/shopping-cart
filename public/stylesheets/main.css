@@ -1,0 +1,59 @@
+.cvcImage{
+  height: 100px;
+}
+.shoping__cart__item img {
+     width: 150px;
+}
+.one-line{
+  width: 30%;
+}
+.shoping__cart__item h4{
+  display: inline;
+  text-align: center;
+}
+.dec, .inc{
+  border: none;
+  background-color: #f5f5f5;
+}
+.fix-button{
+  border: none;
+  background: #fff;
+}
+
+.btn-md{
+  margin-top: 20px;
+}
+.creditcard{
+  background: #870fbf;
+}
+.paypal{
+  background: #1f0cad;
+}
+@keyframes rotate {
+  0%{
+    transform: rotate(360deg);
+  }
+}
+.cart-none{
+  width: 150px;
+  margin: 20px auto;
+}
+.cart-text{
+  text-align: center;
+  margin: 20px auto;
+}
+.btn{
+  margin-bottom: 10px;
+}
+
+footer{
+  margin-top: 25px;
+}
+@media screen and (max-width: 500px) {
+    .shoping__cart__item img {
+         width: 100px;
+    }
+}
+
+
+/* paypal button style */

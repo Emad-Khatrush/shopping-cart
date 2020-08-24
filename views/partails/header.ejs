@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tas Sweet</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <!-- jquery -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery.nice-select.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/jquery.slicknav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <!-- font awesome  -->
+    <script src="https://kit.fontawesome.com/4163cc19b6.js" crossorigin="anonymous"></script>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="../stylesheets/main.css" type="text/css">
+
+</head>
+
+<body>
+  <!-- Page Preloder -->
+  <!-- <div id="preloder">
+      <div class="loader"></div>
+  </div> -->
+
+  <!-- Humberger Begin -->
+  <div class="humberger__menu__overlay"></div>
+  <div class="humberger__menu__wrapper">
+      <div class="humberger__menu__logo">
+          <a href="/"><img src="./img/logo.png" alt=""></a>
+      </div>
+      <div class="humberger__menu__cart">
+        <ul>
+          <% if (currentUser) { %>
+            <li>
+              <a href="/favourite">
+                <i class="fa fa-heart">
+                </i>
+                <span>
+                  <%= favouriteNum %>
+                </span>
+              </a>
+            </li>
+          <% } %>
+            <li>
+              <a href="/mycart">
+                <i class="fa fa-shopping-bag">
+                </i>
+                <span class="products-num">
+                  <% if(session.cart) { %>
+                      <%= session.cart.totalQty %>
+                    <% }else{ %>
+                      0
+                    <% } %>
+                </span>
+              </a>
+            </li>
+        </ul>
+          <div class="header__cart__price">
+            <% if(session.cart){ %>
+            item: <span> $<%= session.cart.totalPrice %>  </span>
+          <% }else{ %>
+            item: <span> $0 </span>
+            <% } %>
+          </div>
+      </div>
+      <div class="humberger__menu__widget">
+        <div class="header__top__right__auth" style="list-style: none;">
+          <% if(!currentUser){ %>
+          <a class="line" href="/login"><i class="fa fa-user"></i> Login</a>
+          <a class="line" href="/register"><i class="fa fa-user"></i> Register</a>
+          <% }else{ %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= currentUser.firstName %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/profile">Profile</a>
+                <a class="dropdown-item" href="/orders">Orders</a>
+                <a class="dropdown-item" href="/favourite">Favourites</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+
+          <% } %>
+        </div>
+      </div>
+      <nav class="humberger__menu__nav mobile-menu">
+          <ul>
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/products">Shop</a></li>
+              <li><a href="/contact">Contact</a></li>
+          </ul>
+      </nav>
+      <div id="mobile-menu-wrap"></div>
+      <div class="header__top__right__social">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-pinterest-p"></i></a>
+      </div>
+      <div class="humberger__menu__contact">
+          <ul>
+              <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+              <li>Free Shipping for all Order of $99</li>
+          </ul>
+      </div>
+  </div>
+  <!-- Humberger End -->
+
+  <!-- Header Section Begin -->
+  <header class="header">
+      <div class="header__top">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                      <div class="header__top__left">
+                          <ul>
+                              <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                              <li>Free Shipping for all Order of $99</li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                      <div class="header__top__right">
+                          <div class="header__top__right__social">
+                              <a href="#"><i class="fa fa-facebook"></i></a>
+                              <a href="#"><i class="fa fa-twitter"></i></a>
+                              <a href="#"><i class="fa fa-linkedin"></i></a>
+                              <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                          </div>
+                          <div class="header__top__right__auth" style="list-style: none;">
+                            <% if(!currentUser){ %>
+                            <a class="line" href="/login"><i class="fa fa-user"></i> Login</a>
+                            <a class="line" href="/register"><i class="fa fa-user"></i> Register</a>
+                            <% }else{ %>
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <%= currentUser.firstName %>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="/profile">Profile</a>
+                                  <a class="dropdown-item" href="/orders">Orders</a>
+                                  <a class="dropdown-item" href="/favourite">Favourites</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="/logout">Logout</a>
+                                </div>
+                              </li>
+
+                            <% } %>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>

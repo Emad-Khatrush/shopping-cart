@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Registration Form</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="./stylesheets/style2.css">
+		<link rel="stylesheet" href="./stylesheets/bootstrap.min.css" type="text/css">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url('https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80');">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="https://images.unsplash.com/photo-1575224300306-1b8da36134ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80" alt="">
+				</div>
+
+
+
+				<form action="/register" method="post">
+					<!-- flash messages -->
+			    <div class="container" >
+			      <% if(error && error.length > 0){ %>
+			      <div class="alert alert-danger" role="alert" width"50px" height="30px">
+			        <%= error %>
+			      </div>
+			    <% } %>
+			    <% if(success && success.length > 0){ %>
+			      <div class="alert alert-success" role="alert" width"50px" height="30px">
+			        <%= success %>
+			      </div>
+			      <% } %>
+			    </div>
+			    <!-- flash messages end-->
+					<h3>Registration Form</h3>
+					<div class="form-group">
+						<input type="text" name="firstName" placeholder="First Name" class="form-control">
+						<input type="text" name="lastName" placeholder="Last Name" class="form-control">
+					</div>
+					<div class="form-wrapper">
+						<input type="text" name="username" placeholder="Email Address" class="form-control">
+						<i class="zmdi zmdi-email"></i>
+					</div>
+          <div class="form-wrapper">
+						<input type="text" name="phone" placeholder="Phone Number" class="form-control">
+						<i class="zmdi zmdi-account"></i>
+					</div>
+					<div class="form-wrapper">
+						<select name="gender" class="form-control">
+							<option value="" disabled selected>Gender</option>
+							<option value="male">Male</option>
+							<option value="femal">Female</option>
+							<option value="other">Other</option>
+						</select>
+						<i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="password" name="password" placeholder="Password" class="form-control" pattern=".{6,18}">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<button>Register
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+
+					<p class="login-link">Already have an account?
+						<a href="/login"><span>Login</span></a>
+					</p>
+
+				</form>
+			</div>
+		</div>
+
+	</body>
+</html>

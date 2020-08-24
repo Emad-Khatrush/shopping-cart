@@ -1,0 +1,209 @@
+<%- include ('../partails/header') -%>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-3">
+              <div class="header__logo">
+                  <a href="/"><img src="img/logo.png" alt=""></a>
+              </div>
+          </div>
+          <div class="col-lg-6">
+              <nav class="header__menu">
+                  <ul>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/products">Shop</a></li>
+                      <li><a href="./contact.html">Contact</a></li>
+                  </ul>
+              </nav>
+          </div>
+          <div class="col-lg-3">
+              <div class="header__cart">
+                  <ul>
+                    <% if (currentUser) { %>
+                      <li>
+                        <a href="/favourite">
+                          <i class="fa fa-heart">
+                          </i>
+                          <span>
+                            <%= favouriteNum %>
+                          </span>
+                        </a>
+                      </li>
+                    <% } %>
+                      <li>
+                        <a href="/mycart">
+                          <i class="fa fa-shopping-bag">
+                          </i>
+                          <span class="products-num">
+                            <% if(session.cart) { %>
+                                <%= session.cart.totalQty %>
+                              <% }else{ %>
+                                0
+                              <% } %>
+                          </span>
+                        </a>
+                      </li>
+                  </ul>
+                  <div class="header__cart__price">
+                    <% if(session.cart){ %>
+                    item: <span> $<%= session.cart.totalPrice %>  </span>
+                  <% }else{ %>
+                    item: <span> $0 </span>
+                    <% } %>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="humberger__open">
+          <i class="fa fa-bars"></i>
+      </div>
+  </div>
+  <!-- Header Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Checkout</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- flash messages -->
+      <div class="container" >
+        <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger mt-4" role="alert">
+          <%= error %>
+        </div>
+      <% } %>
+      <% if(success && success.length > 0){ %>
+        <div class="alert alert-success mt-4" role="alert" >
+          <%= success %>
+        </div>
+        <% } %>
+      </div>
+    <!-- flash messages end-->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                  </h6>
+              </div>
+          </div>
+          <div class="checkout__form">
+              <h4>Billing Details</h4>
+              <form action="/create-payment-intent" method="post" id="checkout-form">
+                  <div class="row">
+                      <div class="col-lg-8 col-md-6">
+                          <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="checkout__input">
+                                      <p>Fist Name<span>*</span></p>
+                                      <input class="required" type="text" name="firstName" required>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="checkout__input">
+                                      <p>Last Name<span>*</span></p>
+                                      <input class="required" type="text" name="lastName" required>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="checkout__input">
+                              <p>Address<span>*</span></p>
+                              <input  type="text" placeholder="Street Address" class="required checkout__input__add" name="address" required>
+                          </div>
+                          <div class="checkout__input">
+                              <p>Town/City<span>*</span></p>
+                              <input class="required" type="text" name="city" required>
+                          </div>
+                          <div class="checkout__input">
+                              <p>Country/State<span>*</span></p>
+                              <input class="required" type="text" name="country" required>
+                          </div>
+                          <div class="checkout__input">
+                              <p>Postcode / ZIP<span>*</span></p>
+                              <input class="required" type="text" name="postcode" required>
+                          </div>
+                          <div class="row">
+                              <div class="col-lg-6">
+                                  <div class="checkout__input">
+                                      <p>Phone<span>*</span></p>
+                                      <input class="required" type="text" name="phone" required>
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-6">
+                                  <div class="checkout__input">
+                                      <p>Email<span>*</span></p>
+                                      <% if(currentUser){ %>
+                                      <input class="required" type="text" name="email" value="<%= currentUser.username %>"required>
+                                        <% }else{ %>
+                                      <input class="required" type="text" name="email" placeholder="Email" required>
+                                        <% } %>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="checkout__input">
+                              <p>Order notes</p>
+                              <input type="hidden" id="intent_id" name="intent_id" value="<%= intent_id %>">
+                              <input type="text"
+                                  placeholder="Notes about your order, e.g. special notes for delivery." name="note">
+                          </div>
+
+                      </div>
+
+
+                      <div class="col-lg-4 col-md-6">
+                          <div class="checkout__order">
+                              <h4>Your Order</h4>
+                              <div class="checkout__order__products">Products <span>Total</span></div>
+                              <ul>
+                                <% products.forEach((items) => { %>
+                                  <li><%= items.item.name %> <span> $<%= items.price %> </span> </li>
+                                <% }) %>
+                              </ul>
+                              <div class="checkout__order__subtotal">Subtotal <span> $<%= total %></span></div>
+                              <div class="checkout__order__total">Total <span> $<%= total %></span></div>
+
+
+
+                              <button type="submit" class="site-btn creditcard" id="pay-now">
+                                <i class="fas fa-credit-card"></i>
+                                PLACE ORDER</button>
+                                <input type="hidden" id="secret" name="secretValue" value="<%= clientSecret %>">
+                              <div id="card-element" class="bg-transparent text-white p-2 h-10 mb-4"></div>
+                              <div id="card-errors" role="alert"></div>
+
+                              <h2 class="text-center">OR</h2>
+                                <button type="submit" class="site-btn paypal" id="paypal-btn">
+                                  <i class="fab fa-paypal"></i> PayPal
+                                </button>
+                              </form>
+
+                          </div>
+                      </div>
+
+    </section>
+
+
+
+
+
+    <!-- Checkout Section End -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="../js/checkout.js"></script>
+<%- include ('../partails/footer') -%>

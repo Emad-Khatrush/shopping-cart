@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login Form</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="./stylesheets/style2.css">
+		<link rel="stylesheet" href="./stylesheets/bootstrap.min.css" type="text/css">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url('https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80');">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="https://images.unsplash.com/photo-1551379825-a9cac579e621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=342&q=80" alt="">
+				</div>
+				<form class="form-center" action="/Login" method="post">
+					<!-- flash messages -->
+			    <div class="container" >
+			      <% if(error && error.length > 0){ %>
+			      <div class="alert alert-danger" role="alert" width"50px" height="30px">
+			        <%= error %>
+			      </div>
+			    <% } %>
+			    <% if(success && success.length > 0){ %>
+			      <div class="alert alert-success" role="alert" width"50px" height="30px">
+			        <%= success %>
+			      </div>
+			      <% } %>
+			    </div>
+			    <!-- flash messages end-->
+					<h3>Login Form</h3>
+					<div class="form-wrapper">
+						<input type="text" name="username" placeholder="Email" class="form-control">
+						<i class="zmdi zmdi-email"></i>
+					</div>
+
+					<div class="form-wrapper">
+						<input type="password" name="password" placeholder="Password" class="form-control">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<button>Login
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+					<p class="login-link">Don't have an account?
+						<a href="/register"><span>Join</span></a>
+					</p>
+					<p class="login-link">Forgot your password?
+						<a href="/reset-password"><span>Reset</span></a>
+					</p>
+				</form>
+			</div>
+		</div>
+
+	</body>
+</html>

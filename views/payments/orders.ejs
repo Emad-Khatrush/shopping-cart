@@ -1,0 +1,135 @@
+<%- include ('../partails/header') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="header__logo">
+                <a href="./index.html"><img src="img/logo.png" alt=""></a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <nav class="header__menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Shop</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3">
+            <div class="header__cart">
+                <ul>
+                  <% if (currentUser) { %>
+                    <li>
+                      <a href="/favourite">
+                        <i class="fa fa-heart">
+                        </i>
+                        <span>
+                          <%= favouriteNum %>
+                        </span>
+                      </a>
+                    </li>
+                  <% } %>
+                    <li>
+                      <a href="/mycart">
+                        <i class="fa fa-shopping-bag">
+                        </i>
+                        <span class="products-num">
+                          <% if(session.cart) { %>
+                              <%= session.cart.totalQty %>
+                            <% }else{ %>
+                              0
+                            <% } %>
+                        </span>
+                      </a>
+                    </li>
+                </ul>
+                <div class="header__cart__price">
+                  <% if(session.cart){ %>
+                  item: <span> $<%= session.cart.totalPrice %>  </span>
+                <% }else{ %>
+                  item: <span> $0 </span>
+                  <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="humberger__open">
+        <i class="fa fa-bars"></i>
+    </div>
+</div>
+<!-- Header Section End -->
+
+<!-- Order Information -->
+  <div class="container">
+    <div class="checkout__form">
+        <h4>My Orders</h4>
+    </div>
+
+    <section class="shoping-cart spad">
+            <div class="row">
+              <% if(orders){ %>
+                <div class="col-lg-12">
+                  <% orders.forEach((order, index) => { %>
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Order Number #<%= index+1 %> </th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <% order.items.forEach((items) => { %>
+
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="<%= items.item.image %>" alt="emad">
+                                        <h4><%= items.item.name %></h4>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        $<%= items.item.price %>
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <strong><%= items.qty %></strong>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        $<%= items.price %>
+                                    </td>
+                                </tr>
+                                <%    }); %>
+                                <tr>
+                                  <div>
+                                    <td><strong>Total Order: </strong>$<%= order.cart.totalPrice %></td>
+                                    <td class="one-line"><strong>Order State: </strong> <%= order.status %> </td>
+                                  </div>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <%  }); %>
+                </div>
+                <% }else{ %>
+                  <div class="col-sm-12">
+                    <div class="cart-none">
+                      <img src="https://images.ctfassets.net/pryp695498en/1nk81pS9WxwK52KBu0IuvV/91ba31857f3f678801c1300b3c788af3/shopping_logo_white__1_.svg" alt="">
+                    </div>
+                    <div class="cart-text">
+                      <h2>You dont have orders yet</h2>
+                    </div>
+                  </div>
+                <% } %>
+            </div>
+    </section>
+  </div>
+
+
+
+<%- include ('../partails/footer') -%>

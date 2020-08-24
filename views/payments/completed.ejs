@@ -1,0 +1,79 @@
+<%- include ('../partails/header') -%>
+<!-- Header Section start -->
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-3">
+              <div class="header__logo">
+                  <a href="/"><img src="img/logo.png" alt=""></a>
+              </div>
+          </div>
+          <div class="col-lg-6">
+              <nav class="header__menu">
+                  <ul>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/products">Shop</a></li>
+                      <li><a href="./contact.html">Contact</a></li>
+                  </ul>
+              </nav>
+          </div>
+          <div class="col-lg-3">
+              <div class="header__cart">
+                  <ul>
+                    <% if (currentUser) { %>
+                      <li>
+                        <a href="/favourite">
+                          <i class="fa fa-heart">
+                          </i>
+                          <span>
+                            <%= favouriteNum %>
+                          </span>
+                        </a>
+                      </li>
+                    <% } %>
+                      <li>
+                        <a href="/mycart">
+                          <i class="fa fa-shopping-bag">
+                          </i>
+                          <span class="products-num">
+                            <% if(session.cart) { %>
+                                <%= session.cart.totalQty %>
+                              <% }else{ %>
+                                0
+                              <% } %>
+                          </span>
+                        </a>
+                      </li>
+                  </ul>
+                  <div class="header__cart__price">
+                    <% if(session.cart){ %>
+                    item: <span> $<%= session.cart.totalPrice %>  </span>
+                  <% }else{ %>
+                    item: <span> $0 </span>
+                    <% } %>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="humberger__open">
+          <i class="fa fa-bars"></i>
+      </div>
+  </div>
+  </header>
+  <!-- Header Section End -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="cart-none">
+        <img src="https://icon-library.com/images/completed-icon/completed-icon-6.jpg" alt="">
+      </div>
+      <div class="cart-text">
+        <h2>Order Completed</h2>
+        <p>Thank you for your purchase</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include ('../partails/footer') -%>
